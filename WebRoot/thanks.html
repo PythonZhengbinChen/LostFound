@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>燕山大学失物招领平台</title>
+<meta name="keywords"
+	content="燕山大学,燕山大学失物招领,燕大失物招领,高校,高校失物招领,失物招领,寻物启事,校园,找东西,丢东西,失物招领平台" />
+<meta name="author" content="AlphaThink" />
+<meta name="description"
+	content="燕山大学失物招领公共服务平台(找到TA)，是为了方便燕大学生找到丢失物品，汇聚大家的力量，传递爱心！" />
+<meta name="viewport" content="width=device-width" />
+<link rel="stylesheet" href="css/style_2014.css">
+</head>
+<body>
+	<div class="g-hd g-bgc4">
+		<div class="m-hd">
+			<div class="m-logo">
+				<a href=""><img src="images/logo.png" width="50%" alt="" /></a>
+			</div>
+			<div class="m-nav">
+				<ul>
+					<li><a href="lost.html" id="index">首页</a></li>
+					<li><a href="lost.html" id="lost">丢了东西</a></li>
+					<li><a href="find.html" id="find">捡到东西</a></li>
+					<li><a href="thanks.html" id="thank">感谢Ta</a></li>
+					<!--                        <li><a href="http://find.zzufor.com/2013" id="2013">2013爱心榜</a></li>
+-->
+					<li><a href="feedback.html" id="feedback">意见反馈</a></li>
+				</ul>
+			</div>
+			<div class="m-tn"></div>
+		</div>
+	</div>
+
+
+	<!--main-->
+	<div class="g-bd1 f-cb">
+		<div class="g-mn">
+			<div class="main-in">
+				<!-- <div class="m-title g-bgc3" id="tip">感谢TA-奉献爱心，传递正能量
+                <div><a href=""></a></div>
+            </div> -->
+				<div class="m-title" id="tip" style="display: none">thanks</div>
+				<!--form-->
+				<div class="m-form f-fs14">
+					<form id="form" action="./thanks.do" method="post">
+						<div class="formitm">
+							<label class="lab">#您的姓名：</label>
+							<div class="ipt">
+								<input type="text" class="u-ipt" name="name" /> <span></span>
+							</div>
+						</div>
+						<div class="formitm">
+							<label class="lab">#常用邮箱：</label>
+							<div class="ipt">
+								<input type="text" class="u-ipt" name="email" /> <span></span>
+							</div>
+						</div>
+						<div class="formitm">
+							<label class="lab">院系/专业：</label>
+							<div class="ipt">
+								<input type="text" class="u-ipt" name="department" /> <span></span>
+							</div>
+						</div>
+						<div class="formitm">
+							<label class="lab">#感谢内容：</label>
+							<div class="ipt">
+								<textarea class="u-tat" name="content"></textarea>
+								<span></span>
+							</div>
+						</div>
+						<div class="formitm">
+							<label class="lab">验证码：</label>
+							<div class="ipt">
+								<input type="text" class="u-ipt" style="width: 150px;"
+									name="verify" /><img class="code-img" src="./verify.do" alt="验证码"
+									id="verifyImage" onclick="verifyChange()" /><a
+									href="javascript:void(0)" class="f-ib" onclick="verifyChange()">换一张</a>
+							</div>
+						</div>
+
+						<div class="formitm formitm-1 f-cb">
+							<input type="submit" value="提交" class="u-btn g-bgc0" id="btn" />
+						</div>
+					</form>
+				</div>
+				<!--end form-->
+			</div>
+		</div>
+		<div class="g-sd">
+			<div class="m-box">
+				<div class="m-step f-cb">
+					<div class="title">请先阅读</div>
+					<div class="box">1、物品特征>建议您填写物品的主要特征（如颜色、大小、种类、物主线索等）</div>
+					<div class="box">2、物品照片>强烈建议您添加物品照片，图片比文字描述更直观</div>
+					<div class="box">3、物品描述>建议您尽可能详细的描述物品信息和物主线索，如卡类证件须写出证件种类、证件号、姓名等！</div>
+					<div class="box">4、联系方式>建议您填写真实的联系方式，方便物主与您联系，物品归还失主后您可以申请删除此条信息</div>
+					<div class="box">5、电子邮箱>请务必输入您的个人常用邮箱，邮箱是您删除、补充此条信息的唯一凭证和途径</div>
+				</div>
+			</div>
+			
+			<div class="m-box">
+				<div class="m-step f-cb" id="thanksBox">
+					<div class="title">感谢列表</div>
+					
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<script type="text/javascript" src="js/jquery-1.7.1.js"></script>
+	<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="js/jquery.validate.config.js"></script>
+	<script type="text/javascript" src="js/jquery.form.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript">
+	function getLostThingInfoList() {
+     
+      $.ajax({
+        url: "/LostFound/getThanksList.do",
+        async: false,
+        type: "post",
+        dataType: "json",
+        success: function(data) {
+        var length = data.length;
+          if(!data)
+        	return;
+          if(data.length > 15) {
+          	length = 15;
+          }
+          for(var i=0;i<length;i++) {
+          		var str = "<div style=\"border-bottom: 1px dashed #fff;\" class=\"box\">"+(i+1)+"、"+data[i].name+"的感谢："+data[i].content+"。</div>";
+          		$("#thanksBox").append(str);
+          }
+        },
+        error: function(e) {
+          console.log(e.responseText);
+        }
+      });
+    }
+	
+	
+$(function(){
+	getLostThingInfoList();
+
+ var rules={
+    name:{
+        required:true,
+        CHS:true
+    },
+    email:{
+        required:true,
+        email:true,
+        minlength:3,
+        maxlength:35
+    },
+    department:{
+        minlength:3,
+        maxlength:50
+    },
+    content:{
+        required:true,
+        minlength:3,
+        maxlength:350
+    }
+}
+
+form("#form",rules, "./thanks.do", "POST", "#tip", "#btn", function(msg){
+        $('#form').hide();
+            //msg.html('提交成功啦！我们已经将信息放在这里 <a href="./thanks/list">点击此处，去看看</a>');
+            msg.html('提交成功啦！');
+        });
+})
+
+function verifyChange(){
+    $("#verifyImage").attr("src","./verify.do?"+Math.random());
+}
+</script>
+
+	<input type="hidden" style="display: none" id="menu-curr" value="thank" />
+	<!--footer-->
+
+	<!--footer-->
+
+	<div class="g-ft f-cb">
+		<div class="f-wrap f-tac ">
+			<div class="f-link ">
+				<a target="_blank" href="#">联系我们</a> <a target="_blank" href="#">志愿者招募</a>
+				<a target="_blank" href="#">帮助中心</a> <a href="feedback.html">意见反馈</a>
+			</div>
+			&Copyright 2017 ysufor.com Powered by 燕山大学失物招领中心&AlphaThink 当前版本:v1.0
+		</div>
+	</div>
+
+	<script type="text/javascript">
+$(function(){
+  var page=$("#menu-curr").val();
+  if(page){
+    $('#'+page).addClass('curr');
+  }
+})
+</script>
+</body>
+</html>

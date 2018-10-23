@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>燕山大学失物招领平台</title>
+  <meta name="keywords" content="燕山大学,燕山大学失物招领,燕大失物招领,高校,高校失物招领,失物招领,寻物启事,校园,找东西,丢东西,失物招领平台" />
+  <meta name="author" content="AlphaThink" />
+  <meta name="description" content="燕山大学失物招领公共服务平台(找到TA)，是为了方便燕大学生找到丢失物品，汇聚大家的力量，传递爱心！" />
+  <meta name="viewport" content="width=device-width" />
+  <link rel="stylesheet" href="css/style_2014.css">
+</head>
+<body>
+		<div class="g-hd g-bgc4">
+			<div class="m-hd">
+				<div class="m-logo">
+          <a href="" ><img src="images/logo.png" width="50%" alt=""/></a>
+				</div>
+				<div class="m-nav">
+					<ul>
+						<li><a href="lost.html" id="index">首页</a></li>
+            <li><a href="lost.html" id="lost">丢了东西</a></li>
+            <li><a href="find.html" id="find">捡到东西</a></li>
+            <li><a href="thanks.html" id="thank">感谢Ta</a></li>
+<!--            <li><a href="http://find.zzufor.com/2013" id="2013">2013爱心榜</a></li>
+-->           <li><a href="feedback.html" id="feedback">意见反馈</a></li>
+					</ul>
+				</div>
+				<div class="m-tn">
+				</div>
+			</div>
+		</div>
+
+
+    <!--main-->
+    <div class="g-bd f-cb">
+        <!-- <div class="m-title g-bgc1" id="tip">物品详细信息</div> -->        
+        <div class="m-form f-fs14 f-cb" style="overflow:hidden;">
+         <div style="float:left;width:470px;margin-bottom:-10000px;
+         padding-bottom:10000px;">
+         <div class="formitm1">
+            <label class="lab">物品特征：</label>
+            <div class="ipt" id="feature">
+                身份证
+            </div>
+        </div>
+        
+        <div class="formitm1">
+            <label class="lab">拾获时间：</label>
+            <div class="ipt" id="time">
+                2个月前
+            </div>
+        </div>
+
+        <div class="formitm1">
+            <label class="lab">拾获地点：</label>
+            <div class="ipt" id="place">
+                南1201
+            </div>
+        </div>
+        
+        <div class="formitm1">
+            <label class="lab">归属校区：</label>
+            <div class="ipt" id="campus">
+                新校区
+            </div>
+        </div>
+
+        <div class="formitm1">
+            <label class="lab">物品分类：</label>
+            <div class="ipt" id="type">
+                卡类证件
+            </div>
+        </div>
+
+        <div class="formitm1">
+            <label class="lab">浏览次数：</label>
+            <div class="ipt" id="count">
+                151
+            </div>
+        </div>
+    </div>
+
+    <div style="float:right;width:470px;text-align:center;margin-bottom:-10000px;
+    padding-bottom:10000px;" class="f-cb">
+    <img id="thingsImg" class ="" src="http://img.zzufor.com/find/20170514121400mjr40zpw1xxh67w8.jpg!200" style="margin-top:15px;max-height:200px">
+</div>
+</div>
+<div class="m-form f-fs14 f-cb">
+    <div >        
+        <div class="formitm1">
+            <label class="lab">详细描述：</label>
+            <div class="ipt" id="description">
+                南核捡到身份证一张
+            </div>
+        </div>
+        <div class="formitm formitm-1 f-cb">
+            <div class="u-btn2 g-bgc0" id="me">认领</div>
+                        <!--<div class="u-btn2 g-bgc0">微博转发</div>
+                    -->
+                    <div class="u-btn2 g-bgc0 wait">申请删除</div>
+                    <div class="u-btn2 g-bgc0 wait">补充信息</div>
+                    <div class="u-btn2 g-bgc0 wait">虚假举报</div>
+                </div>
+            </div>
+
+        </div>
+        <!--end form-->
+    </div>
+
+    <!--遮盖层-->
+    <div class="m-mask" style="display:none" id="mask">
+    </div>
+
+    <!--弹出窗口-->
+    <div class="m-form1 f-fs14 f-cb" style="display:none" id="box">
+    	<div style="display:none" id="user-box">
+    		<div class="formitm">
+    			<label class="lab"></label>
+    			<div class="ipt">请与如下同学联系认领事宜,保护个人隐私是我们共同的责任</div>
+    		</div>
+
+    		<div class="formitm">
+                <label class="lab">姓名：</label>
+                <div class="ipt" id="name"></div>
+            </div>
+            
+            <div class="formitm">
+                <label class="lab">邮箱：</label>
+                <div class="ipt" id="email"></div>
+            </div>
+
+            <div class="formitm">
+                <label class="lab">联系电话：</label>
+                <div class="ipt" id="phone"></div>
+            </div>
+        </div>
+
+        <div id="verify-box">
+          <div class="formitm f-cb">
+             <label class="lab"></label>
+             <div class="ipt" id="msg">请输入下方验证码</div>
+         </div>
+         <div class="formitm">
+             <label class="lab">验证码：</label>
+             <div class="ipt">
+                 <input type="text" class="u-ipt" style="width:150px;" name="verify" id="verify"/><img class="code-img" src="./verify.do" alt="验证码" id="verifyImage" onclick="verifyChange()" /><a href="javascript:void(0)" class="f-ib" onclick="verifyChange()">换一张</a>
+             </div>
+         </div>
+         <div class="formitm formitm-1">
+             <input type="submit" value="提交" class="u-btn g-bgc2" id="btn" />
+         </div>	
+     </div>
+ </div>
+
+ <div class="m-form1 f-fs14 f-cb" style="display:none" id="wait">
+    <div class="formitm">
+        <label class="lab"></label>
+        <div class="ipt">此功能近期将对外开放，暂无法使用!如果您有任何疑问，请发送邮件至lostfound@ysu.edu.cn</div>
+    </div>
+</div>
+
+<script type="text/javascript" src="js/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="js/jquery.form.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript">
+function getLostThingInfoList() {
+		
+      $("#feature").html("");
+      $("#time").html("");
+      $("#place").html("");
+      $("#campus").html("");
+      $("#type").html("");
+      $("#description").html("");
+      $("#name").html("");
+      $("#email").html("");
+      $("#phone").html("");
+      $.ajax({
+        url: "/LostFound/getLostThingById.do",
+        async: false,
+        type: "post",
+        dataType: "json",
+        success: function(data) {
+        	var campus = "西校区";
+          		if(data.campus == 0) {
+          			campus = "东校区";
+          		}
+          		var type = "";
+          		switch(data.type) {
+          			case 0: type = "其他";break;
+          			case 1: type = "书籍资料";break;
+          			case 2: type = "衣物饰品";break;
+          			case 3: type = "交通工具";break;
+          			case 4: type = "随身物品";break;
+          			case 5: type = "电子数码";break;
+          			case 6: type = "卡类证件";break;
+          		}
+          $("#feature").html(data.feature);
+	      $("#time").html(data.time);
+	      $("#place").html(data.place);
+	      $("#campus").html(campus);
+	      $("#type").html(type);
+	      $("#description").html(data.description);
+	      $("#name").html(data.name);
+	      $("#email").html(data.email);
+	      $("#phone").html(data.phone);
+	      var str = "images/"+data.id+".jpg";
+	      $("#thingsImg").attr("src",str);
+	      $("#thingsImg").addClass(data.id);
+        },
+        error: function(e) {
+          console.log(e.responseText);
+        }
+      });
+    }
+    
+    function getLostThingWebVisitCountById() {
+      $("#count").html("");
+      $.ajax({
+        url: "/LostFound/getLostThingWebVisitCountById.do",
+        async: false,
+        type: "post",
+        dataType: "json",
+        success: function(data) {
+	      $("#count").html(data);
+        },
+        error: function(e) {
+          console.log(e.responseText);
+        }
+      });
+    }
+
+
+$(function(){
+getLostThingInfoList();
+getLostThingWebVisitCountById();
+
+
+/**弹出层效果**/
+ $("#me").avgrund({
+    height: 200,
+    holderClass: '',
+    showClose: true,
+    showCloseText: '关闭',
+    target: "#box"
+});
+
+ $('.wait').each(function(){
+    $(this).avgrund({
+        height: 200,
+        holderClass: '',
+        showClose: true,
+        showCloseText: '关闭',
+        target: "#wait"
+    });
+});
+
+ $("#btn").bind('click',function(){
+     
+
+  ajaxAction('./getFounderInfo.do','POST',$("#verify").val(),$("#thingsImg").attr("class"),$("#msg"),function(json){
+      $("#name").html(json.name);
+      $("#email").html(json.email);
+      $("#tel").html(json.tel);
+      $("#verify-box").hide();
+      $("#user-box").show();
+  });
+});
+})
+
+function verifyChange(){
+    $("#verifyImage").attr("src","./verify.do?t="+Math.random());
+}
+
+function ajaxAction(url, type, dat , id , tip, callback) {
+   $.ajax({
+       url: url,
+       type: type,
+       data: {
+       	id: id,
+       	verify: dat
+       },
+       cache: false,
+       dataType: "json",
+       error: function () {
+           tip.html('系统出现异常，请重新尝试！');
+       },
+       success: function (data) {
+       	console.log(data);
+           if (data != null) {
+               
+               if (callback) {
+                   callback(data);
+               } else {
+                   tip.html('操作错误，请重新尝试！');
+               }            
+               
+           } else {
+               tip.html('操作错误，请重新尝试！');
+           }
+       }
+   });
+}
+</script>
+
+<input type="hidden" style="display:none" id="menu-curr" value="lost"/> 
+<!--footer-->
+
+ <!--footer-->
+
+     <div class="g-ft f-cb">
+         <div class="f-wrap f-tac ">
+            <div class="f-link ">
+                    <a target="_blank" href="#">联系我们</a>
+                    <a target="_blank" href="#">志愿者招募</a>
+                    <a target="_blank" href="#">帮助中心</a>
+                    <a href="feedback.html">意见反馈</a>
+             </div>
+                &Copyright 2017 ysufor.com Powered by 燕山大学失物招领中心&AlphaThink 当前版本:v1.0
+        </div>          
+     </div>
+<script type="text/javascript">
+$(function(){
+  var page=$("#menu-curr").val();
+  if(page){
+    $('#'+page).addClass('curr');
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>燕山大学失物招领平台</title>
+<meta name="keywords"
+	content="燕山大学,燕山大学失物招领,燕大失物招领,高校,高校失物招领,失物招领,寻物启事,校园,找东西,丢东西,失物招领平台" />
+<meta name="author" content="AlphaThink" />
+<meta name="description"
+	content="燕山大学失物招领公共服务平台(找到TA)，是为了方便燕大学生找到丢失物品，汇聚大家的力量，传递爱心！" />
+<meta name="viewport" content="width=device-width" />
+<link rel="stylesheet" href="css/style_2014.css">
+</head>
+<body onload="displayTime()">
+	<div class="g-hd g-bgc4">
+		<div class="m-hd">
+			<div class="m-logo">
+				<a href=""><img src="images/logo.png" width="50%" alt="" /></a></a>
+			</div>
+			<div class="m-nav">
+				<ul>
+					<li><a href="lost.html" id="index">首页</a></li>
+					<li><a href="lost.html" id="lost">丢了东西</a></li>
+					<li><a href="find.html" id="find">捡到东西</a></li>
+					<li><a href="thanks.html" id="thank">感谢Ta</a></li>
+					<!--                        <li><a href="http://find.zzufor.com/2013" id="2013">2013爱心榜</a></li>
+-->
+					<li><a href="feedback.html" id="feedback">意见反馈</a></li>
+				</ul>
+			</div>
+			<div class="m-tn"></div>
+		</div>
+	</div>
+
+
+	<!--main-->
+	<div class="g-bd1 f-cb">
+		<div class="g-mn">
+			<div class="main-in">
+				<div class="m-title " id="tip" style="display: none">捡到东西</div>
+				<!--  <div class="m-step f-cb">
+                <div class="title">重要内容</div> <div class="close" id="m-close">X</div>
+                <div class="box">1、物品特征>建议您填写物品的主要特征（如颜色、大小、种类、物主线索等）</div>
+                <div class="box">2、物品照片>强烈建议您添加物品照片，图片比文字描述更直观</div>
+                <div class="box">3、物品描述>建议您尽可能详细的描述物品信息和物主线索，如卡类证件须写出证件种类、证件号、姓名等！</div>
+                <div class="box">4、联系方式>建议您填写真实的联系方式，方便物主与您联系，物品归还失主后您可以申请删除此条信息</div>
+                <div class="box">5、电子邮箱>请务必输入您的个人常用邮箱，邮箱是您删除、补充此条信息的唯一凭证和途径</div>
+            </div>     -->
+				<div class="m-form f-fs14">
+					<form id="form" action="./find.do"  name="form" method="post" enctype="multipart/form-data" onsubmit="return check()">
+						<div class="formitm">
+							<label class="lab">#物品特征：</label>
+							<div class="ipt">
+								<input type="text" class="u-ipt" name="goods"
+									style="width: 200px" /> 
+									<a href="#" class="u-upload g-bgc0">
+									 <input type="file" id="file" name="file" value="" onchange="test()"/>
+								</a> 
+								<div id="show" style="color: #666;"></div>
+							</div>
+						</div>
+
+						<div class="formitm">
+							<label class="lab">#拾获时间：</label>
+							<div class="ipt">
+								<input type="text" class="u-ipt" id="date" name="date"/>
+								<span></span>
+							</div>
+						</div>
+
+						<div class="formitm">
+							<label class="lab">#拾获地点：</label>
+							<div class="ipt">
+								<input type="text" class="u-ipt" name="address" /> <span></span>
+							</div>
+						</div>
+
+						<div class="formitm">
+							<label class="lab">#所在校区：</label>
+							<div class="ipt">
+								<div class="select select-off" op="off">东校区</div>
+								<ul>
+									<li vl="0">东校区</li>
+									<li vl="1">西校区</li>
+								</ul>
+								<input type="hidden" name="campus" value="0"></input>
+							</div>
+						</div>
+
+						<div class="formitm">
+							<label class="lab">#类别：</label>
+							<div class="ipt f-cb" style="width: 300px">
+								<div class="select select-off" id="cat" op="off">其他物品(请选择类别)</div>
+								<ul>
+									<li vl="1">书籍资料</li>
+									<li vl="2">衣物饰品</li>
+									<li vl="3">交通工具</li>
+									<li vl="4">随身物品</li>
+									<li vl="5">电子数码</li>
+									<li vl="6">卡类证件</li>
+									<li vl="0">其他物品</li>
+								</ul>
+								<input type="hidden" name="category" value="0"></input>
+							</div>
+						</div>
+
+						<div class="formitm">
+							<label class="lab">#物品描述：</label>
+							<div class="ipt">
+								<textarea class="u-tat" name="description"></textarea>
+								<span></span>
+							</div>
+						</div>
+
+						<div class="formitm">
+							<label class="lab">#您的姓名：</label>
+							<div class="ipt">
+								<input type="text" class="u-ipt" name="name" /> <span></span>
+							</div>
+						</div>
+						<div class="formitm">
+							<label class="lab">#联系邮箱：</label>
+							<div class="ipt">
+								<input type="text" class="u-ipt" name="email" /> <span></span>
+							</div>
+						</div>
+						<div class="formitm">
+							<label class="lab">手机号码：</label>
+							<div class="ipt">
+								<input type="text" class="u-ipt" name="tel" /> <span></span>
+							</div>
+						</div>
+
+						<div class="formitm">
+							<label class="lab">验证码：</label>
+							<div class="ipt">
+								<input type="text" class="u-ipt" style="width: 150px;"name="verify" />
+								<img class="code-img" src="./verify.do" alt="验证码"
+									id="verifyImage" onclick="verifyChange()" /><a
+									href="javascript:void(0)" class="f-ib" onclick="verifyChange()">换一张</a>
+							</div>
+						</div>
+						<div class="formitm formitm-1 f-cb">
+							<input type="submit" value="提交" class="u-btn g-bgc0" id="btn" />
+						</div>
+
+					</form>
+				</div>
+				<!--end form-->
+			</div>
+		</div>
+		<div class="g-sd">
+			<div class="m-box">
+				<div class="m-step f-cb">
+					<div class="title">请先阅读</div>
+					<div class="box">1、物品特征>建议您填写物品的主要特征（如颜色、大小、种类、物主线索等）</div>
+					<div class="box">2、物品照片>强烈建议您添加物品照片，图片比文字描述更直观</div>
+					<div class="box">3、物品描述>建议您尽可能详细的描述物品信息和物主线索，如卡类证件须写出证件种类、证件号、姓名等！</div>
+					<div class="box">4、联系方式>建议您填写真实的联系方式，方便物主与您联系，物品归还失主后您可以申请删除此条信息</div>
+					<div class="box">5、电子邮箱>请务必输入您的个人常用邮箱，邮箱是您删除、补充此条信息的唯一凭证和途径</div>
+				</div>
+			</div>
+			<!--    <div class="m-box">
+        <img src="./images/imgad.jpg" width="300"/>
+    </div> -->
+		</div>
+	</div>
+
+	<script type="text/javascript" src="js/jquery-1.7.1.js"></script>
+	<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="js/jquery.validate.config.js"></script>
+	<script type="text/javascript" src="js/jquery.form.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript">
+$(function(){
+   var rules={
+    goods:{
+        required:true,
+        minlength:3,
+        maxlength:50
+    },
+    date:{
+        required:true,
+        fdate:true
+    },
+    address:{
+        required:true,
+        minlength:3,
+        maxlength:50
+    },
+    name:{
+        required:true,
+        CHS:true
+    },
+    email:{
+        required:true,
+        email:true,
+        minlength:3,
+        maxlength:35
+    },
+    tel:{
+        mobile:true
+    },
+    description:{
+        required:true,
+        minlength:3,
+        maxlength:350
+    }
+}
+
+form("#form",rules, "./find.do", "POST", "#tip", "#btn", function(){
+    $('#form').hide();
+    $('#tip').html('提交成功了！谢谢您的爱心，我们已经将信息放在这里 <a href="./lost.html">点击此处</a>');
+});
+
+$(".select").each(function(i,obj){
+    $(obj).bind("click",function(){
+        var isOpen=$(this).attr('op');
+
+        if(isOpen=='off'){
+         $(this).attr('op','on').removeClass('select-off').addClass('select-on');
+         $(this).next('ul').show();   
+     }else{
+         $(this).attr('op','off').removeClass('select-on').addClass('select-off');
+         $(this).next('ul').hide();   
+     }
+
+ })           
+})
+
+$('ul > li').each(function(i,obj){
+    $(obj).bind('click',function(){
+        var vt=$(this).html();
+        var vl=$(this).attr('vl');
+        var pa=$(obj).parent();
+        pa.hide();
+        pa.prev('div').html(vt).attr('op','off').removeClass('select-on').addClass('select-off');
+        pa.next('input:hidden').val(vl);
+    })
+
+})
+
+$('#m-close').click(function(){
+    $(this).parent().hide();
+})
+
+})
+
+function verifyChange(){
+    $("#verifyImage").attr("src","./verify.do?"+Math.random());
+}
+
+function displayTime()
+{
+    //创建当前时间 也可创建你想要显示的时间 如 var date =new Date("2015-07-04");
+	var date = new Date();
+	//得到年月日
+	var year = date.getFullYear();
+	var month = date.getMonth()+1;
+	var day  = date.getDate();
+	month=extra(month);
+	day=extra(day);
+	var nowTime=year+"-"+month+"-"+day;
+	document.form.date.value=nowTime;
+}
+//补位函数。  
+function extra(x)  
+{  
+    //如果传入数字小于10，数字前补一位0。  
+    if(x < 10)  
+    {  
+        return "0" + x;  
+    }  
+    else  
+    {  
+        return x;  
+    }  
+} 
+
+</script>
+
+	<input type="hidden" style="display: none" id="menu-curr" value="find" />
+	<!--footer-->
+
+	<!--footer-->
+
+	<div class="g-ft f-cb">
+		<div class="f-wrap f-tac ">
+			<div class="f-link ">
+				<a target="_blank" href="#">联系我们</a> <a target="_blank" href="#">志愿者招募</a>
+				<a target="_blank" href="#">帮助中心</a> <a href="feedback.html">意见反馈</a>
+			</div>
+			&Copyright 2017 ysufor.com Powered by 燕山大学失物招领中心&AlphaThink 当前版本:v1.0
+		</div>
+	</div>
+	<script type="text/javascript">
+	function test() {
+		var file = $("#file").val();
+		$("#show").html(file);
+	}
+	
+	function check() {
+		var file = $("#file").val();
+		if(file) {
+			return true;
+		}
+		$("#show").html("请上传物品图片！");
+		return false;
+	}
+	
+$(function(){
+	
+  var page=$("#menu-curr").val();
+  if(page){
+    $('#'+page).addClass('curr');
+  }
+})
+</script>
+</body>
+</html>

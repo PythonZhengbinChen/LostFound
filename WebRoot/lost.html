@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>燕山大学失物招领平台</title>
+	<meta name="keywords" content="燕山大学,燕山大学失物招领,燕大失物招领,高校,高校失物招领,失物招领,寻物启事,校园,找东西,丢东西,失物招领平台" />
+	<meta name="author" content="AlphaThink" />
+	<meta name="description" content="燕山大学失物招领公共服务平台(找到TA)，是为了方便燕大学生找到丢失物品，汇聚大家的力量，传递爱心！" />
+	<meta name="viewport" content="width=device-width" />
+	<link rel="stylesheet" href="css/style_2014.css">
+	<link href="css/jPages.css" rel="stylesheet">
+  	<link href="css/animate.css" rel="stylesheet">
+</head>
+<body>
+		<div class="g-hd g-bgc4">
+			<div class="m-hd">
+				<div class="m-logo">
+					<a href="" ><img src="images/logo.png"  alt=""/></a>
+				</div>
+				<div class="m-nav">
+					<ul>
+						<li><a href="lost.html" id="index">首页</a></li>
+						<li><a href="lost.html" id="lost">丢了东西</a></li>
+						<li><a href="find.html" id="find">捡到东西</a></li>
+						<li><a href="thanks.html" id="thank">感谢Ta</a></li>
+<!--						<li><a href="http://find.zzufor.com/2013" id="2013">2013爱心榜</a></li>
+-->						<li><a href="feedback.html" id="feedback">意见反馈</a></li>
+					</ul>
+				</div>
+				<div class="m-tn">
+				</div>
+			</div>
+		</div>
+
+
+<!--main-->
+<div class="g-bd1 f-cb">
+    <!-- <div class="m-title g-bgc1" id="tip">以下可能是你丢失的物品，请仔细辨认</div>  -->
+    <!--   <div class="m-find f-cb">  -->
+    <div class="m-sd">
+        <div class="cat" onclick="getLostThingInfoListByTypeConditon(this,9)"><a href="#" id="cat0">全部</a> </div>
+        <div class="cat" onclick="getLostThingInfoListByTypeConditon(this,1)"><a href="#" id="cat1">书籍资料</a> </div>
+        <div class="cat" onclick="getLostThingInfoListByTypeConditon(this,2)"><a href="#" id="cat2">衣物饰品</a> </div>
+        <div class="cat" onclick="getLostThingInfoListByTypeConditon(this,3)"><a href="#" id="cat3">交通工具</a> </div>
+        <div class="cat" onclick="getLostThingInfoListByTypeConditon(this,4)"><a href="#" id="cat4">随身物品</a> </div>
+        <div class="cat" onclick="getLostThingInfoListByTypeConditon(this,5)"><a href="#" id="cat5">电子数码</a> </div>
+        <div class="cat" onclick="getLostThingInfoListByTypeConditon(this,6)"><a href="#" id="cat6">卡类证件</a> </div>
+        <div class="cat" onclick="getLostThingInfoListByTypeConditon(this,0)"><a href="#" id="cat7">其他物品</a> </div>
+    </div>
+    <div class="m-fmain">
+        <div class="title f-cb">
+            <div class="campus">
+                <a id="campus0" onclick = "getLostThingInfoListByCampusConditon(this,2)">不限校区</a>
+                <a id="campus1" onclick = "getLostThingInfoListByCampusConditon(this,0)">东校区</a>
+                <a id="campus2" onclick = "getLostThingInfoListByCampusConditon(this,1)">西校区</a>
+            </div>
+            <div class="date">
+                <a href="#" id="date0" onclick="getLostThingInfoListByTimeConditon(this,0)">不限时间</a>
+                <a href="#" id="date1" onclick="getLostThingInfoListByTimeConditon(this,1)">一天内</a>
+                <a href="#" id="date2" onclick="getLostThingInfoListByTimeConditon(this,2)">一周内</a>
+                <a href="#" id="date3" onclick="getLostThingInfoListByTimeConditon(this,3)">一个月内</a>
+            </div>
+        </div>
+
+        
+
+      <div id="main_list">
+        <div class="item">
+                        <a href="goods.html" target="_blank" hidefocus="true">
+                            <div class="goods">
+                                身份证
+                            </div>
+                            <div class="content f-cb">
+                                
+                                <div class="img">
+                                    <img src="images/test.jpg"/>
+                                </div>
+                                <div class="des">
+                                   南核捡到身份证一张
+                               </div>
+                               
+                           </div>
+                           <div class="description">
+                            <div class="f-fl">2个月前</div>
+                            <div class="f-fl i">
+                                新校区
+                            </div>
+                            <div class="f-fl i">卡类证件</div>
+                            <div class="f-fl i">
+                                南1201
+                            </div>
+
+                     <!--    <div class="f-fl i">
+                            网页
+                        </div> -->
+                    </div>
+                </a>
+            </div>
+            
+            
+</div>
+            <!--pages-->
+            <div  class="holder m-page m-page-sr m-page-sm"></div>
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="js/jquery-1.7.1.js"></script>
+    <script type="text/javascript" src="js/quickpager.js"></script>
+<script src="js/jPages.min.js"></script>
+<script src="js/jpage-main.js"></script>
+    <script type="text/javascript">
+    function getLostThingInfoList() {
+      $("#main_list").html("");
+      $.ajax({
+        url: "/LostFound/getLostThingInfoList.do",
+        async: false,
+        type: "post",
+        dataType: "json",
+        success: function(data) {
+          $("#main_list").html("");
+          for(var i=0;i<data.length;i++) {
+          		var campus = "西校区";
+          		if(data[i].campus == 0) {
+          			campus = "东校区";
+          		}
+          		var type = "";
+          		switch(data[i].type) {
+          			case 0: type = "其他";break;
+          			case 1: type = "书籍资料";break;
+          			case 2: type = "衣物饰品";break;
+          			case 3: type = "交通工具";break;
+          			case 4: type = "随身物品";break;
+          			case 5: type = "电子数码";break;
+          			case 6: type = "卡类证件";break;
+          		}
+           		var str = "<div class=\"item\"><a href=\"gotoGetLostThingById.do?id="+data[i].id+"\" target=\"_blank\" hidefocus=\"true\"><div class=\"goods\">"+
+           		data[i].feature+"</div><div class=\"content f-cb\"><div class=\"img\"><img src=\"images/"+data[i].id+".jpg\"/></div><div class=\"des\">"+
+           		data[i].description+"</div></div><div class=\"description\"><div class=\"f-fl\">"+data[i].time+"</div><div class=\"f-fl i\">"+
+           		campus+"</div><div class=\"f-fl i\">"+type+"</div><div class=\"f-fl i\"> "+data[i].place+"</div> </div></a></div>";
+                $("#main_list").append(str);
+          }
+        },
+        error: function(e) {
+          console.log(e.responseText);
+        }
+      });
+    }
+    
+    function getLostThingInfoListByCampusConditon(e,campus) {
+      $("#main_list").html("");
+      $('.campus-current').each(function(){
+	  	$(this).removeClass('campus-current');
+	  });
+	
+	  $(e).addClass('campus-current');
+	  $('#date0').addClass('campus-current');
+	  $('#cat0').addClass('campus-current');
+      $.ajax({
+        url: "/LostFound/getLostThingInfoListByCampusConditon.do",
+        async: false,
+        data: {
+        	campus: campus
+        },
+        type: "post",
+        dataType: "json",
+        success: function(data) {
+          if(data == null) {
+		      var emptyTip = "<div class=\"notice f-cb\">很抱歉，在您选择的条件下没有数据匹配！</div>";
+		      $("#main_list").append(emptyTip);
+		      return;
+	      }
+          $("#main_list").html("");
+          for(var i=0;i<data.length;i++) {
+          		var campus = "西校区";
+          		if(data[i].campus == 0) {
+          			campus = "东校区";
+          		}
+          		var type = "";
+          		switch(data[i].type) {
+          			case 0: type = "其他";break;
+          			case 1: type = "书籍资料";break;
+          			case 2: type = "衣物饰品";break;
+          			case 3: type = "交通工具";break;
+          			case 4: type = "随身物品";break;
+          			case 5: type = "电子数码";break;
+          			case 6: type = "卡类证件";break;
+          		}
+           		var str = "<div class=\"item\"><a href=\"gotoGetLostThingById.do?id="+data[i].id+"\" target=\"_blank\" hidefocus=\"true\"><div class=\"goods\">"+
+           		data[i].feature+"</div><div class=\"content f-cb\"><div class=\"img\"><img src=\"images/"+data[i].id+".jpg\"/></div><div class=\"des\">"+
+           		data[i].description+"</div></div><div class=\"description\"><div class=\"f-fl\">"+data[i].time+"</div><div class=\"f-fl i\">"+
+           		campus+"</div><div class=\"f-fl i\">"+type+"</div><div class=\"f-fl i\"> "+data[i].place+"</div> </div></a></div>";
+                $("#main_list").append(str);
+          }
+        },
+        error: function(e) {
+          console.log(e.responseText);
+        }
+      });
+    }
+    
+    function getLostThingInfoListByTypeConditon(e,type) {
+      $('.campus-current').each(function(){
+	  	$(this).removeClass('campus-current');
+	  });
+	
+	  $("#campus0").addClass('campus-current');
+	  $('#date0').addClass('campus-current');
+	  $(e).addClass('campus-current');
+      $("#main_list").html("");
+      $.ajax({
+        url: "/LostFound/getLostThingInfoListByTypeConditon.do",
+        async: false,
+        data: {
+        	type: type
+        },
+        type: "post",
+        dataType: "json",
+        success: function(data) {
+          if(data == null) {
+		      var emptyTip = "<div class=\"notice f-cb\">很抱歉，在您选择的条件下没有数据匹配！</div>";
+		      $("#main_list").append(emptyTip);
+		      return;
+	      }
+          $("#main_list").html("");
+          for(var i=0;i<data.length;i++) {
+          		var campus = "西校区";
+          		if(data[i].campus == 0) {
+          			campus = "东校区";
+          		}
+          		var type = "";
+          		switch(data[i].type) {
+          			case 0: type = "其他";break;
+          			case 1: type = "书籍资料";break;
+          			case 2: type = "衣物饰品";break;
+          			case 3: type = "交通工具";break;
+          			case 4: type = "随身物品";break;
+          			case 5: type = "电子数码";break;
+          			case 6: type = "卡类证件";break;
+          		}
+           		var str = "<div class=\"item\"><a href=\"gotoGetLostThingById.do?id="+data[i].id+"\" target=\"_blank\" hidefocus=\"true\"><div class=\"goods\">"+
+           		data[i].feature+"</div><div class=\"content f-cb\"><div class=\"img\"><img src=\"images/"+data[i].id+".jpg\"/></div><div class=\"des\">"+
+           		data[i].description+"</div></div><div class=\"description\"><div class=\"f-fl\">"+data[i].time+"</div><div class=\"f-fl i\">"+
+           		campus+"</div><div class=\"f-fl i\">"+type+"</div><div class=\"f-fl i\"> "+data[i].place+"</div> </div></a></div>";
+                $("#main_list").append(str);
+          }
+        },
+        error: function(e) {
+          console.log(e.responseText);
+        }
+      });
+    }
+    
+    function getLostThingInfoListByTimeConditon(e,time) {
+      $('.campus-current').each(function(){
+	  	$(this).removeClass('campus-current');
+	  });
+	
+	  $('#campus0').addClass('campus-current');
+	  $(e).addClass('campus-current');
+	  $('#cat0').addClass('campus-current');
+      $("#main_list").html("");
+      $("#main_list").html("");
+      $.ajax({
+        url: "/LostFound/getLostThingInfoListByTimeConditon.do",
+        async: false,
+        data: {
+        	time: time
+        },
+        type: "post",
+        dataType: "json",
+        success: function(data) {
+          $("#main_list").html("");
+          if(data == null) {
+	          var emptyTip = "<div class=\"notice f-cb\">很抱歉，在您选择的条件下没有数据匹配！</div>";
+	          $("#main_list").append(emptyTip);
+	          return;
+          }
+          for(var i=0;i<data.length;i++) {
+          		var campus = "西校区";
+          		if(data[i].campus == 0) {
+          			campus = "东校区";
+          		}
+          		var type = "";
+          		switch(data[i].type) {
+          			case 0: type = "其他";break;
+          			case 1: type = "书籍资料";break;
+          			case 2: type = "衣物饰品";break;
+          			case 3: type = "交通工具";break;
+          			case 4: type = "随身物品";break;
+          			case 5: type = "电子数码";break;
+          			case 6: type = "卡类证件";break;
+          		}
+           		var str = "<div class=\"item\"><a href=\"gotoGetLostThingById.do?id="+data[i].id+"\" target=\"_blank\" hidefocus=\"true\"><div class=\"goods\">"+
+           		data[i].feature+"</div><div class=\"content f-cb\"><div class=\"img\"><img src=\"images/"+data[i].id+".jpg\"/></div><div class=\"des\">"+
+           		data[i].description+"</div></div><div class=\"description\"><div class=\"f-fl\">"+data[i].time+"</div><div class=\"f-fl i\">"+
+           		campus+"</div><div class=\"f-fl i\">"+type+"</div><div class=\"f-fl i\"> "+data[i].place+"</div> </div></a></div>";
+                $("#main_list").append(str);
+          }
+        },
+        error: function(e) {
+          console.log(e.responseText);
+        }
+      });
+    }
+    
+    $(function(){
+   		$('.campus-current').each(function(){
+            $(this).removeClass('campus-current');
+        });
+
+        $('#campus0').addClass('campus-current');
+        $('#date0').addClass('campus-current');
+        $('#cat0').addClass('campus-current');
+        
+		getLostThingInfoList();
+		jpage_main();
+    });
+</script>
+
+<input type="hidden" style="display:none" id="menu-curr" value="lost"/> 
+<!--footer-->
+
+ <!--footer-->
+
+     <div class="g-ft f-cb">
+         <div class="f-wrap f-tac ">
+            <div class="f-link ">
+                    <a target="_blank" href="#">联系我们</a>
+                    <a target="_blank" href="#">志愿者招募</a>
+                    <a target="_blank" href="#">帮助中心</a>
+                    <a href="feedback.html">意见反馈</a>
+             </div>
+                &Copyright 2017 ysufor.com Powered by 燕山大学失物招领中心&AlphaThink 当前版本:v1.0
+        </div>         
+     </div>
+     <script type="text/javascript">
+$(function(){
+  var page=$("#menu-curr").val();
+  if(page){
+    $('#'+page).addClass('curr');
+  }
+})
+</script>
+</body>
+</html>
